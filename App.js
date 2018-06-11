@@ -1,70 +1,33 @@
 import React, { Component } from 'react';
-import { ListView } from 'react-native';
-import { Container, Header, Content, Button, Icon, List, ListItem, Text ,Left,Body,Title,Right } from 'native-base';
-const datas = [
-  'Simon Mignolet',
-  'Nathaniel Clyne',
-  'Dejan Lovren',
-  'Mama Sakho',
-  'Alberto Moreno',
-  'Emre Can',
-  'Joe Allen',
-  'Phil Coutinho',
-];
-export default class SwipeableListExample extends Component {
+import { Text } from 'react-native';
+import api from './untilities/api';
+
+export default class HelloWorldApp extends Component {
   constructor(props) {
     super(props);
-    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      basic: true,
-      listViewData: datas,
+      rovers:[]
     };
   }
-  deleteRow(secId, rowId, rowMap) {
-    rowMap[`${secId}${rowId}`].props.closeRow();
-    const newData = [...this.state.listViewData];
-    newData.splice(rowId, 1);
-    this.setState({ listViewData: newData });
+  componentWillMount(){
+    api.getRovers().then((res) => {
+      this.setState({
+        rovers:res.rovers
+        
+      })
+    })
   }
   render() {
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    let pushak=[];
+    console.log("Rovers: ",this.state.rovers);
+    for(let omid =0 ;omid < this.state.rovers.length ; omid++ ){
+      pushak.push(this.state.rovers[omid].name);
+    }
     return (
-      <Container>
-         <Header>
-          <Left>
-            <Button transparent>
-              <Icon name='arrow-back' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon name='menu' />
-            </Button>
-          </Right>
-        </Header>
-        <Content>
-          <List
-            dataSource={this.ds.cloneWithRows(this.state.listViewData)}
-            renderRow={data =>
-              <ListItem>
-                <Text> {data} </Text>
-              </ListItem>}
-            renderLeftHiddenRow={data =>
-              <Button full onPress={() => alert(data)}>
-                <Icon active name="information-circle" />
-              </Button>}
-            renderRightHiddenRow={(data, secId, rowId, rowMap) =>
-              <Button full danger onPress={_ => this.deleteRow(secId, rowId, rowMap)}>
-                <Icon active name="trash" />
-              </Button>}
-            leftOpenValue={75}
-            rightOpenValue={-75}
-          />
-        </Content>
-      </Container>
+      <Text>{pushak}</Text>
     );
   }
 }
+
+
+  
