@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ListView } from 'react-native';
-import { Container, Header, Content, Button, Icon, List, ListItem, Text } from 'native-base';
+import { Container, Header, Content, Button, Icon, List, ListItem, Text ,Left,Body,Title,Right } from 'native-base';
 const datas = [
   'Simon Mignolet',
   'Nathaniel Clyne',
@@ -30,7 +30,21 @@ export default class SwipeableListExample extends Component {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     return (
       <Container>
-        <Header />
+         <Header>
+          <Left>
+            <Button transparent>
+              <Icon name='arrow-back' />
+            </Button>
+          </Left>
+          <Body>
+            <Title>Header</Title>
+          </Body>
+          <Right>
+            <Button transparent>
+              <Icon name='menu' />
+            </Button>
+          </Right>
+        </Header>
         <Content>
           <List
             dataSource={this.ds.cloneWithRows(this.state.listViewData)}
