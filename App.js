@@ -24,6 +24,7 @@ export default class HelloWorldApp extends Component {
       pushak.push(this.state.rovers[omid].name);
     }
     return (
+      
       <Text>{pushak}</Text>
     );
   }
