@@ -1,6 +1,6 @@
 var api = {
     getRovers(){
-        var url = `https://api.nasa.gov/mars-photos/api/v1/rovers?api_key=avcq7Zh0fKgQQT9HOJEnUkdcNgxBFA9b7CVfDnfe`;
+        var url = `http://data.fixer.io/api/latest?access_key=459dc535ec3a87e68f189c057954dd81`;
         return fetch(url).then((res) => res.json());
         
     }
