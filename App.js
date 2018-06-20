@@ -9,7 +9,7 @@ export default class FetchExample extends React.Component {
   }
 
   componentDidMount(){
-    return fetch('https://jsonplaceholder.typicode.com/posts?userId=1')
+    return fetch('http://data.fixer.io/api/latest?access_key=459dc535ec3a87e68f189c057954dd81')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -39,7 +39,7 @@ export default class FetchExample extends React.Component {
     }
 
     return(
-      <Text>{this.state.dataSource.userId}</Text>
+      <Text>{this.state.dataSource.rates.USD}</Text>
       //Object.keys(dataSource)[1]
     );
   }
