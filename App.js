@@ -1,34 +1,27 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, Text, View  } from 'react-native';
+import { FlatList, ActivityIndicator, View  } from 'react-native';
+import { Container, Header, Content, List, ListItem, Text } from 'native-base';
+
 
 export default class FetchExample extends React.Component {
-
   constructor(props){
     super(props);
     this.state ={ isLoading: true}
   }
 
   componentDidMount(){
-    return fetch('http://data.fixer.io/api/latest?access_key=459dc535ec3a87e68f189c057954dd81')
+    return fetch('http://miiran.com/MI%20SERVICE/php/app/guaranty.php?imei=865395033415801')
       .then((response) => response.json())
       .then((responseJson) => {
-
         this.setState({
           isLoading: false,
-          dataSource: responseJson[0],
-        }, function(){
-
-        });
-
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
+          datakol: responseJson    
+ })                    
+})
+ 
   }
-
-
-
   render(){
+   
 
     if(this.state.isLoading){
       return(
@@ -39,8 +32,22 @@ export default class FetchExample extends React.Component {
     }
 
     return(
-      <Text>{this.state.dataSource.rates.USD}</Text>
-      //Object.keys(dataSource)[1]
-    );
+      <Container>
+      <Header />
+      <Content>
+        <List>
+          <ListItem>
+            <Text>Simon Mignolet</Text>
+          </ListItem>
+          <ListItem>
+            <Text>Nathaniel Clyne</Text>
+          </ListItem>
+          <ListItem>
+            <Text>Dejan Lovren</Text>
+          </ListItem>
+        </List>
+      </Content>
+    </Container>
+    ); 
   }
 }
